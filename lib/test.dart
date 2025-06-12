@@ -1,6 +1,7 @@
-import 'package:eva_messenger_flutter/core/widgets/custom_scaffold/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:go_router/go_router.dart';
+import 'core/widgets/custom_scaffold/custom_scaffold.dart';
 
 class ExamplePage extends StatefulWidget {
   const ExamplePage({super.key});
@@ -25,6 +26,18 @@ class _ExampleState extends State<ExamplePage> {
           suffix: const Icon(FIcons.chevronsUp),
           child: const Text('Increase'),
         ),
+        FButton(
+            onPress: () => context.push('/auth/phone'),
+            child: Text('Auth')
+        ),
+        // FButton(
+        //     onPress: () => GetIt.I<AuthBloc>().add(UserLoggedOutEvent()),
+        //     child: Text('Sign Out')
+        // ),
+        // FButton(
+        //     onPress: () => GetIt.I<AuthBloc>().add(UserLoggedOutEvent()),
+        //     child: Text('Check User auth')
+        // ),
       ],
     ),
   );

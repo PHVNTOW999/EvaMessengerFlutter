@@ -1,13 +1,19 @@
-import 'package:eva_messenger_flutter/test.dart';
+import 'package:eva_messenger_flutter/modules/auth/pages/auth_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'core/di/injection.dart';
 
-void main() {
-  runApp(const Application());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  setupDependencies();
+
+  runApp(const App());
 }
 
-class Application extends StatelessWidget {
-  const Application({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +24,7 @@ class Application extends StatelessWidget {
       supportedLocales: FLocalizations.supportedLocales,
       builder: (_, child) => FTheme(data: theme, child: child!),
       theme: theme.toApproximateMaterialTheme(),
-      home: ExamplePage(),
+      home: AuthPage(),
     );
   }
 }
@@ -45,6 +51,7 @@ class _ExampleState extends State<Example> {
           suffix: const Icon(FIcons.chevronsUp),
           child: const Text('Increase'),
         ),
+        // Add other global BLoC providers here if needed
       ],
     ),
   );
