@@ -17,7 +17,6 @@ class _ExampleState extends State<ExamplePage> {
   Widget build(BuildContext context) => CustomScaffold(
     title: 'Example',
     body: Column(
-      // mainAxisSize: MainAxisSize.min,
       spacing: 10,
       children: [
         Text('Count: $_count'),
@@ -27,17 +26,9 @@ class _ExampleState extends State<ExamplePage> {
           child: const Text('Increase'),
         ),
         FButton(
-            onPress: () => context.push('/auth/phone'),
+            onPress: () => context.go('/auth'),
             child: Text('Auth')
         ),
-        // FButton(
-        //     onPress: () => GetIt.I<AuthBloc>().add(UserLoggedOutEvent()),
-        //     child: Text('Sign Out')
-        // ),
-        // FButton(
-        //     onPress: () => GetIt.I<AuthBloc>().add(UserLoggedOutEvent()),
-        //     child: Text('Check User auth')
-        // ),
       ],
     ),
   );

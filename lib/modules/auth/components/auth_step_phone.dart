@@ -12,8 +12,6 @@ class AuthStepPhone {
     final bloc = context.read<AuthStepperBloc>();
     final state = context.watch<AuthStepperBloc>().state;
 
-    // final AuthBloc _authBloc = GetIt.I<AuthBloc>();
-
     final _formKey = GlobalKey<FormState>();
     final _phoneController = TextEditingController();
 

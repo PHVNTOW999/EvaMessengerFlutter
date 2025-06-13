@@ -27,11 +27,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await _firebaseAuthService.sendOtp(
         phoneNumber: event.phoneNumber,
         codeSent: (verificationId, resendToken) {
-          print('verID $verificationId');
           emit(CodeSentSuccess(verificationId));
         },
         verificationFailed: (FirebaseAuthException e) {
-          emit(AuthFailure(e.message ?? 'Ошибка при отправке OTP'));
+          emit(AuthFailure(e.message ?? 'Error when sending OTP'));
         },
       );
     } catch (e) {
@@ -47,29 +46,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         otp: event.otp,
       );
       if (user != null) {
-        print('=== USER AUTHED $user ===');
         emit(AuthSuccess(user));
       } else {
-        emit(const AuthFailure('Неверный OTP или произошла ошибка.'));
+        emit(const AuthFailure('Invalid OTP or another error.'));
       }
     } on FirebaseAuthException catch (e) {
-      emit(AuthFailure(e.message ?? 'Ошибка при верификации OTP'));
+      emit(AuthFailure(e.message ?? 'Error while verifying OTP'));
     } catch (e) {
       emit(AuthFailure(e.toString()));
     }
   }
 
   void _onAuthUserChanged(AuthUserChanged event, Emitter<AuthState> emit) {
-    if (event.uid != null) {
-      // Если пользователь уже вошел в систему, можно получить его данные
-      // или просто перевести в AuthSuccess с текущим пользователем.
-      final currentUser = _firebaseAuthService.getCurrentUser();
-      if (currentUser != null) {
-        print('=== USER AUTHED ===');
-        emit(AuthSuccess(currentUser));
-      } else {
-        emit(Unauthenticated());
-      }
+    final currentUser = _firebaseAuthService.getCurrentUser();
+    if (currentUser != null) {
+      emit(AuthSuccess(currentUser));
     } else {
       emit(Unauthenticated());
     }

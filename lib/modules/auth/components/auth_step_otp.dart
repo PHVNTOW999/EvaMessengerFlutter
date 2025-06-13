@@ -11,7 +11,6 @@ class AuthStepOTP {
   static Step build(BuildContext context) {
     final state = context.watch<AuthStepperBloc>().state;
 
-    final AuthBloc _authBloc = GetIt.I<AuthBloc>();
     final AuthService _authService = GetIt.I<AuthService>();
 
     final _formKey = GlobalKey<FormState>();
@@ -54,8 +53,6 @@ class AuthStepOTP {
                     );
                     return;
                   }
-
-                  print('=== VER_ID: $verificationId ===');
 
                   GetIt.I<AuthBloc>().add(
                     VerifyOtpEvent(verificationId, _otpController.text.trim()),

@@ -27,7 +27,7 @@ class AuthService {
     await _firebaseAuth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) async {
-        // Автоматическая верификация на Android
+        // Auto auth on Android
         await _firebaseAuth.signInWithCredential(credential);
       },
       verificationFailed: verificationFailed,

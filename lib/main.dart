@@ -1,7 +1,7 @@
-import 'package:eva_messenger_flutter/modules/auth/pages/auth_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'core/const/router.dart';
 import 'core/di/injection.dart';
 
 void main() async {
@@ -19,12 +19,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = FThemes.blue.dark;
 
-    return MaterialApp(
+    return MaterialApp.router(
       localizationsDelegates: FLocalizations.localizationsDelegates,
       supportedLocales: FLocalizations.supportedLocales,
       builder: (_, child) => FTheme(data: theme, child: child!),
       theme: theme.toApproximateMaterialTheme(),
-      home: AuthPage(),
+      routerConfig: router,
     );
   }
 }
